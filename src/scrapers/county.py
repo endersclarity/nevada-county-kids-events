@@ -5,6 +5,7 @@ from typing import List, Dict, Any
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
+from icalendar import Calendar
 from .base import BaseScraper
 from ..config import Config
 
@@ -19,8 +20,8 @@ class CountyScraper(BaseScraper):
     """
 
     CALENDAR_URL = "https://www.nevadacountyca.gov/Calendar.aspx"
-    # iCal subscription URL pattern (if available)
-    ICAL_URL = "https://www.nevadacountyca.gov/icalendar.aspx"
+    # iCal feed URL (Main Calendar - all county events)
+    ICAL_URL = "https://www.nevadacountyca.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
 
     def __init__(self):
         super().__init__("county")
@@ -102,79 +103,70 @@ class CountyScraper(BaseScraper):
             raise
 
     def _parse_ical(self, ical_text: str) -> List[Dict[str, Any]]:
-        """Parse iCal format into event dictionaries."""
+        """Parse iCal format using icalendar library."""
         events = []
 
-        # Simple iCal parser (VEVENT blocks)
-        event_blocks = re.findall(r'BEGIN:VEVENT(.*?)END:VEVENT', ical_text, re.DOTALL)
+        try:
+            cal = Calendar.from_ical(ical_text)
 
-        for block in event_blocks:
-            try:
-                event = self._parse_ical_event(block)
-                if event and event.get('title'):
-                    events.append(event)
-            except Exception as e:
-                logger.error(f"Error parsing iCal event: {e}")
-                continue
+            for component in cal.walk('VEVENT'):
+                try:
+                    event = self._parse_ical_event(component)
+                    if event and event.get('title'):
+                        events.append(event)
+                except Exception as e:
+                    logger.error(f"Error parsing iCal event: {e}")
+                    continue
+
+        except Exception as e:
+            logger.error(f"Error parsing iCal calendar: {e}")
 
         return events
 
-    def _parse_ical_event(self, event_block: str) -> Dict[str, Any]:
-        """Parse a single iCal VEVENT block."""
+    def _parse_ical_event(self, vevent) -> Dict[str, Any]:
+        """Parse a single iCal VEVENT component."""
         # Extract fields
-        title = self._extract_ical_field(event_block, 'SUMMARY')
-        description = self._extract_ical_field(event_block, 'DESCRIPTION')
-        location = self._extract_ical_field(event_block, 'LOCATION')
-        dtstart = self._extract_ical_field(event_block, 'DTSTART')
-        dtend = self._extract_ical_field(event_block, 'DTEND')
-        uid = self._extract_ical_field(event_block, 'UID')
-        url = self._extract_ical_field(event_block, 'URL')
+        title = str(vevent.get('SUMMARY', ''))
+        description = str(vevent.get('DESCRIPTION', ''))
+        location = str(vevent.get('LOCATION', ''))
+        uid = str(vevent.get('UID', ''))
 
         # Parse date
-        event_date = self._parse_ical_date(dtstart)
+        event_date = ''
+        dtstart = vevent.get('DTSTART')
+        if dtstart:
+            try:
+                dt = dtstart.dt
+                if hasattr(dt, 'date'):
+                    event_date = dt.date().isoformat()
+                else:
+                    event_date = dt.isoformat()
+            except Exception as e:
+                logger.debug(f"Error parsing date: {e}")
+
+        # Clean up description (remove HTML tags and extra whitespace)
+        description = re.sub(r'<[^>]+>', ' ', description)
+        description = re.sub(r'\s+', ' ', description).strip()
+
+        # Clean up location (remove HTML tags)
+        location = re.sub(r'<[^>]+>', ' ', location)
+        location = re.sub(r'\s+', ' ', location).strip()
 
         # Build event dictionary
         event = {
             'title': title,
-            'description': description or '',
+            'description': description[:500] if description else '',  # Limit description length
             'event_date': event_date,
-            'venue': location or '',
+            'venue': location[:200] if location else '',  # Limit venue length
             'city_area': 'Nevada County',
             'age_range': '',  # County events rarely specify age range
             'price': None,
             'is_free': True,  # Government events are typically free
-            'source_url': url or self.CALENDAR_URL,
-            'source_event_id': uid or '',
+            'source_url': self.CALENDAR_URL,
+            'source_event_id': uid,
         }
 
         return event
-
-    def _extract_ical_field(self, block: str, field: str) -> str:
-        """Extract a field value from iCal block."""
-        pattern = rf'{field}[;:]([^\r\n]+)'
-        match = re.search(pattern, block)
-        if match:
-            value = match.group(1).strip()
-            # Remove iCal escaping
-            value = value.replace('\\,', ',').replace('\\n', '\n').replace('\\\\', '\\')
-            return value
-        return ""
-
-    def _parse_ical_date(self, dtstart: str) -> str:
-        """Parse iCal date format to ISO date."""
-        if not dtstart:
-            return ""
-
-        try:
-            # iCal format: YYYYMMDDTHHMMSS or YYYYMMDD
-            date_str = dtstart.split('VALUE=DATE:')[-1].split('T')[0]
-            if len(date_str) == 8:
-                dt = datetime.strptime(date_str, '%Y%m%d')
-                return dt.date().isoformat()
-        except Exception:
-            pass
-
-        return ""
 
     def parse(self, elements: List[Any]) -> List[Dict[str, Any]]:
         """
