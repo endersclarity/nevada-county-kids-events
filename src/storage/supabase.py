@@ -21,16 +21,27 @@ class SupabaseClient:
 
     def _build_connection_string(self) -> str:
         """Build Postgres connection string from Supabase credentials"""
-        if not Config.SUPABASE_URL or not Config.SUPABASE_KEY:
-            raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set in environment")
+        from urllib.parse import quote_plus
+
+        if not Config.SUPABASE_URL:
+            raise ValueError("SUPABASE_URL must be set in environment")
 
         # Extract project ref from URL
         # Format: https://[project-ref].supabase.co
         project_ref = Config.SUPABASE_URL.replace('https://', '').replace('.supabase.co', '')
 
-        # Supabase Postgres connection format
-        # Using pooler connection for better performance
-        conn_str = f"postgresql://postgres.{project_ref}:{Config.SUPABASE_KEY}@aws-0-us-west-1.pooler.supabase.com:6543/postgres"
+        # Use database password if available, otherwise fall back to anon key
+        password = Config.SUPABASE_DB_PASSWORD if Config.SUPABASE_DB_PASSWORD else Config.SUPABASE_KEY
+
+        if not password:
+            raise ValueError("Either SUPABASE_DB_PASSWORD or SUPABASE_KEY must be set in environment")
+
+        # URL encode password for special characters
+        encoded_password = quote_plus(password)
+
+        # Supabase Postgres Session pooler (IPv4 compatible)
+        # Using Session mode pooler on port 5432
+        conn_str = f"postgresql://postgres.{project_ref}:{encoded_password}@aws-1-us-east-2.pooler.supabase.com:5432/postgres"
 
         return conn_str
 

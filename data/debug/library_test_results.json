@@ -1,0 +1,75 @@
+{
+  "total_events": 97,
+  "sample_events": [
+    {
+      "title": "Baby Storytime",
+      "description": "Join Miss Emily for Baby Storytime at the historic Grass Valley Library. This short story time is filled with rhymes, songs, and stories for the youngest children and their caregivers. We invite you to linger and enjoy each other's company after the story time. Toys will be provided.",
+      "event_date": "2025-10-07",
+      "time_range": "10:30 AM - 10:45 AM",
+      "venue": "Grass Valley Library",
+      "city_area": "Nevada County",
+      "age_range": "",
+      "price": null,
+      "is_free": true,
+      "source_url": "",
+      "source_event_id": "",
+      "categories": ""
+    },
+    {
+      "title": "Baby Storytime",
+      "description": "Looking for a great way to engage with your little ones? Join us for a delightful morning of story and song with Miss Betsey every Tuesday at the Penn Valley Library!",
+      "event_date": "2025-10-07",
+      "time_range": "10:30 AM - 11:00 AM",
+      "venue": "Penn Valley Library",
+      "city_area": "Nevada County",
+      "age_range": "",
+      "price": null,
+      "is_free": true,
+      "source_url": "",
+      "source_event_id": "",
+      "categories": ""
+    },
+    {
+      "title": "Paws to Read",
+      "description": "Practice reading aloud with Raven, the therapy dog!\n\nBring a book from home or choose one from our shelves.",
+      "event_date": "2025-10-07",
+      "time_range": "2:00 PM - 3:00 PM",
+      "venue": "Bear River Library",
+      "city_area": "Nevada County",
+      "age_range": "",
+      "price": null,
+      "is_free": true,
+      "source_url": "",
+      "source_event_id": "",
+      "categories": ""
+    },
+    {
+      "title": "LEGO Club",
+      "description": "Build with LEGOs and display your creations in the LEGO Museum!\n\nThe library will provide all the LEGOs and weekly building challenges.\n\nRecommended for ages 6",
+      "event_date": "2025-10-07",
+      "time_range": "3:00 PM - 5:00 PM",
+      "venue": "Bear River Library Community Room, Bear River Library",
+      "city_area": "Nevada County",
+      "age_range": "",
+      "price": null,
+      "is_free": true,
+      "source_url": "",
+      "source_event_id": "",
+      "categories": ""
+    },
+    {
+      "title": "Tween Craft: Mini Halloween/Fall \"Snow\" Globes",
+      "description": "Join us at Truckee Library for this month's Tween craft, for ages 8-12. Create your own Halloween or fall inspired mini globe in a jar! We’ll use small glass jars and little bats or leaves instead of snow to make a one-of-a-kind fall decoration to take home.",
+      "event_date": "2025-10-07",
+      "time_range": "3:00 PM - 4:00 PM",
+      "venue": "Truckee Library",
+      "city_area": "Nevada County",
+      "age_range": "",
+      "price": null,
+      "is_free": true,
+      "source_url": "",
+      "source_event_id": "",
+      "categories": ""
+    }
+  ]
+}

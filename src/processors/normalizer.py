@@ -45,32 +45,80 @@ class Normalizer:
     def __init__(self, source_name: str):
         self.source_name = source_name
 
-    def normalize(self, events: List[Dict[str, Any]]) -> List[NormalizedEvent]:
+    def normalize(
+        self,
+        events: List[Dict[str, Any]],
+        min_quality_score: int = 0,
+        log_quality_stats: bool = True
+    ) -> List[NormalizedEvent]:
         """
         Normalize a list of raw event dictionaries.
 
         Args:
             events: Raw event data from scraper
+            min_quality_score: Minimum quality score (0-100) to include events (default: 0)
+            log_quality_stats: Whether to log quality statistics (default: True)
 
         Returns:
             List of NormalizedEvent objects
         """
         normalized = []
         validation_errors = 0
+        filtered_count = 0
 
         for event in events:
             try:
                 normalized_event = self._normalize_event(event)
                 if normalized_event:
+                    # Filter by quality score
+                    if normalized_event.quality_score < min_quality_score:
+                        filtered_count += 1
+                        logger.debug(
+                            f"Event '{normalized_event.title}' filtered (quality score: {normalized_event.quality_score})"
+                        )
+                        continue
+
                     normalized.append(normalized_event)
             except Exception as e:
                 validation_errors += 1
                 logger.error(f"Validation error for event '{event.get('title', 'Unknown')}': {e}")
                 continue
 
-        logger.info(f"Normalized {len(normalized)} events ({validation_errors} validation errors)")
+        # Log quality statistics
+        if log_quality_stats and normalized:
+            self._log_quality_stats(normalized)
+
+        logger.info(
+            f"Normalized {len(normalized)} events "
+            f"({validation_errors} validation errors, {filtered_count} filtered by quality)"
+        )
 
         return normalized
+
+    def _log_quality_stats(self, events: List[NormalizedEvent]) -> None:
+        """Log quality statistics for normalized events."""
+        if not events:
+            return
+
+        scores = [e.quality_score for e in events]
+        avg_score = sum(scores) / len(scores)
+
+        # Count by quality tier
+        high_quality = sum(1 for s in scores if s >= 80)
+        medium_quality = sum(1 for s in scores if 50 <= s < 80)
+        low_quality = sum(1 for s in scores if s < 50)
+
+        # Calculate percentages
+        total = len(events)
+        high_pct = (high_quality / total * 100) if total > 0 else 0
+        med_pct = (medium_quality / total * 100) if total > 0 else 0
+        low_pct = (low_quality / total * 100) if total > 0 else 0
+
+        logger.info("=" * 50)
+        logger.info(f"Quality Stats: Avg={avg_score:.0f}, High={high_pct:.0f}%, Med={med_pct:.0f}%, Low={low_pct:.0f}%")
+        if low_quality > 0:
+            logger.warning(f"{low_quality} events below quality threshold (score < 50)")
+        logger.info("=" * 50)
 
     def _normalize_event(self, event: Dict[str, Any]) -> Optional[NormalizedEvent]:
         """Normalize a single event."""

@@ -172,6 +172,89 @@ class TestNormalizer(unittest.TestCase):
         self.assertIsInstance(data['event_date'], str)  # Should be ISO format
         self.assertIn('2025-10-15', data['event_date'])
 
+    def test_quality_filtering(self):
+        """Test quality score filtering"""
+        events = [
+            {
+                'title': 'High Quality Event',
+                'event_date': '2025-10-15',
+                'description': 'A' * 100,  # Long description
+                'venue': 'Test Venue',
+                'age_range': '5-12',
+                'price': 'Free'
+            },
+            {
+                'title': 'Low Quality Event',
+                'event_date': '2025-10-16',
+                # No other fields
+            }
+        ]
+
+        # Filter events with score < 50
+        normalized = self.normalizer.normalize(events, min_quality_score=50, log_quality_stats=False)
+
+        # Should only get the high-quality event
+        self.assertEqual(len(normalized), 1)
+        self.assertEqual(normalized[0].title, 'High Quality Event')
+
+    def test_quality_stats_logging(self):
+        """Test quality statistics logging"""
+        events = [
+            {
+                'title': f'Event {i}',
+                'event_date': f'2025-10-{15+i}',
+                'description': 'A' * 100 if i % 3 == 0 else 'Short',
+                'venue': 'Venue' if i % 2 == 0 else None,
+                'age_range': '5-12' if i % 2 == 1 else None,
+                'price': 'Free' if i % 3 == 0 else None
+            }
+            for i in range(10)
+        ]
+
+        # This should log quality stats
+        normalized = self.normalizer.normalize(events, log_quality_stats=True)
+
+        # All events should be normalized
+        self.assertEqual(len(normalized), 10)
+
+        # Verify all have quality scores
+        for event in normalized:
+            self.assertGreaterEqual(event.quality_score, 0)
+            self.assertLessEqual(event.quality_score, 100)
+
+    def test_quality_tiers(self):
+        """Test quality tier categorization"""
+        # High quality (80-100)
+        high_quality_events = [{
+            'title': 'High Quality',
+            'event_date': '2025-10-15',
+            'description': 'A' * 100,
+            'venue': 'Venue',
+            'age_range': '5-12',
+            'price': 'Free'
+        }]
+        high_normalized = self.normalizer.normalize(high_quality_events, log_quality_stats=False)
+        self.assertGreaterEqual(high_normalized[0].quality_score, 80)
+
+        # Medium quality (50-79)
+        medium_quality_events = [{
+            'title': 'Medium Quality',
+            'event_date': '2025-10-15',
+            'description': 'Short description',
+            'venue': 'Venue'
+        }]
+        medium_normalized = self.normalizer.normalize(medium_quality_events, log_quality_stats=False)
+        self.assertGreaterEqual(medium_normalized[0].quality_score, 50)
+        self.assertLess(medium_normalized[0].quality_score, 80)
+
+        # Low quality (0-49)
+        low_quality_events = [{
+            'title': 'Low Quality',
+            'event_date': '2025-10-15',
+        }]
+        low_normalized = self.normalizer.normalize(low_quality_events, log_quality_stats=False)
+        self.assertLess(low_normalized[0].quality_score, 50)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nevada County//Calendar//EN
+BEGIN:VEVENT
+UID:12345@nevadacountyca.gov
+DTSTART:20251015T100000
+DTEND:20251015T110000
+SUMMARY:Build, Make, Play
+DESCRIPTION:Join us in the Grass Valley Library kids room and lets have fun creating\, building\, and learning together.
+LOCATION:Grass Valley Library
+URL:https://www.nevadacountyca.gov/calendar.aspx?EID=12345
+END:VEVENT
+BEGIN:VEVENT
+UID:12346@nevadacountyca.gov
+DTSTART;VALUE=DATE:20251020
+SUMMARY:Board of Supervisors Meeting
+DESCRIPTION:Regular meeting of the Nevada County Board of Supervisors
+LOCATION:County Chambers\, Nevada City
+URL:https://www.nevadacountyca.gov/calendar.aspx?EID=12346
+END:VEVENT
+BEGIN:VEVENT
+UID:12347@nevadacountyca.gov
+DTSTART:20251021T140000
+DTEND:20251021T150000
+SUMMARY:LEGO Club
+DESCRIPTION:Building adventures with LEGO Club! All ages welcome.
+LOCATION:Penn Valley Library
+URL:https://www.nevadacountyca.gov/calendar.aspx?EID=12347
+END:VEVENT
+END:VCALENDAR

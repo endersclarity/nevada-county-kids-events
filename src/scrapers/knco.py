@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 class KNCOScraper(BaseScraper):
     """Scraper for KNCO Trumba RSS feed"""
 
-    RSS_URL = "https://www.trumba.com/calendars/tourism-knco.rss"
+    RSS_URL = "https://www.trumba.com/calendars/KNCO.rss"
 
     def __init__(self):
         super().__init__("knco")
@@ -123,14 +123,46 @@ class KNCOScraper(BaseScraper):
         return guid
 
     def _extract_date(self, entry: Any) -> str:
-        """Extract event date from entry (use published date or parse from description)"""
+        """Extract event date from entry (use category field or description)"""
+        from datetime import datetime
+
         # Try published date first
         if hasattr(entry, 'published_parsed') and entry.published_parsed:
-            from datetime import datetime
             dt = datetime(*entry.published_parsed[:6])
             return dt.isoformat()
 
-        # Fallback to empty string (normalizer will handle)
+        # Try category field (Trumba format: "2025/10/07 (Tue)")
+        category = entry.get('category', '')
+        if category:
+            # Extract date portion before parentheses
+            date_match = re.search(r'(\d{4}/\d{2}/\d{2})', category)
+            if date_match:
+                try:
+                    dt = datetime.strptime(date_match.group(1), '%Y/%m/%d')
+                    return dt.isoformat()
+                except ValueError:
+                    pass
+
+        # Try extracting from description (e.g., "Tuesday, October 7, 2025, 11am")
+        description = entry.get('description', '')
+        # Look for patterns like "October 7, 2025" or "Oct 7, 2025"
+        date_patterns = [
+            r'(\w+day,?\s+\w+\s+\d{1,2},?\s+\d{4})',  # "Tuesday, October 7, 2025"
+            r'(\w+\s+\d{1,2},?\s+\d{4})',  # "October 7, 2025"
+        ]
+        for pattern in date_patterns:
+            match = re.search(pattern, description)
+            if match:
+                date_str = match.group(1)
+                # Try parsing with various formats
+                for fmt in ['%A, %B %d, %Y', '%A %B %d, %Y', '%B %d, %Y', '%b %d, %Y']:
+                    try:
+                        dt = datetime.strptime(date_str, fmt)
+                        return dt.isoformat()
+                    except ValueError:
+                        continue
+
+        # Fallback to empty string (normalizer will filter these out)
         return ""
 
     def _parse_description_html(self, html: str) -> Dict[str, Any]:
