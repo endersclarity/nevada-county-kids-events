@@ -197,7 +197,13 @@ class LibraryScraper(BaseScraper):
         if source_url and not source_url.startswith('http'):
             source_url = f"https://nevadacountyca.gov{source_url}"
 
+        # Extract event ID from URL, or generate from title+date if not available
         source_event_id = self._extract_event_id(source_url)
+        if not source_event_id:
+            # Generate unique ID from title + date hash
+            import hashlib
+            unique_str = f"{title}_{event_date}_{venue}"
+            source_event_id = hashlib.md5(unique_str.encode()).hexdigest()[:16]
 
         # Build event dictionary
         event = {

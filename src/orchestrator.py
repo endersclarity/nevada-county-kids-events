@@ -95,6 +95,8 @@ class EventOrchestrator:
                 raw_events = scraper.fetch()
 
                 from .processors.normalizer import Normalizer
+                from .processors.deduplicator import Deduplicator
+
                 normalizer = Normalizer(source)
                 normalized = normalizer.normalize(
                     raw_events,
@@ -102,11 +104,22 @@ class EventOrchestrator:
                     log_quality_stats=True
                 )
 
-                # Store in database
-                self.db.upsert_events(normalized)
+                # Convert to dict format for deduplication
+                normalized_dicts = [e.to_dict() for e in normalized]
 
-                # Convert to dict format
-                events = [e.to_dict() for e in normalized]
+                # Deduplicate events
+                deduplicator = Deduplicator()
+                deduplicated_dicts = deduplicator.deduplicate(normalized_dicts)
+
+                # Convert back to NormalizedEvent objects for storage
+                from .processors.normalizer import NormalizedEvent
+                deduplicated = [NormalizedEvent(**d) for d in deduplicated_dicts]
+
+                # Store in database
+                self.db.upsert_events(deduplicated)
+
+                # Return dict format
+                events = deduplicated_dicts
                 is_cache_hit = False
 
             duration = (datetime.now() - source_start).total_seconds()
