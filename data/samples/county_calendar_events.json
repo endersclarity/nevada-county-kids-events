@@ -1,0 +1,264 @@
+{
+  "source": "Nevada County Official Calendar",
+  "urls": {
+    "primary": "https://www.nevadacountyca.gov/Calendar.aspx",
+    "ical_export": "https://www.nevadacountyca.gov/iCalendar.aspx",
+    "rss_feed": "https://www.nevadacountyca.gov/rss.aspx#calendar"
+  },
+  "scraped_at": "2025-10-07",
+  "method": "WebFetch (HTML scraping with JavaScript rendering)",
+  "export_options": {
+    "ical": true,
+    "rss": true,
+    "print": true
+  },
+  "sample_events": [
+    {
+      "title": "Build, Make, Play",
+      "date": "October 1, 2025",
+      "time": "3:00 PM - 4:00 PM",
+      "location": "Grass Valley Library",
+      "description": "Join us in the Grass Valley Library kid's room and let's have fun creating, building, and learning together.",
+      "category": "Library - Grass Valley",
+      "kid_relevant": true
+    },
+    {
+      "title": "Art Club",
+      "date": "October 1, 2025",
+      "time": "4:00 PM - 5:00 PM",
+      "location": "Grass Valley Library",
+      "description": "Looking to infuse your week with a burst of creativity? Join the Grass Valley Adult Art Club!",
+      "category": "Library - Grass Valley",
+      "kid_relevant": false
+    },
+    {
+      "title": "Good to Grow Grant Workshop",
+      "date": "October 1, 2025",
+      "time": "4:30 PM - 5:30 PM",
+      "location": "Nevada City Office - Eric Rood Administration Center",
+      "description": "Grant workshop details",
+      "category": "Main Calendar / Government",
+      "kid_relevant": false
+    },
+    {
+      "title": "Classic Monster Movie Showcase",
+      "date": "October 3, 2025",
+      "time": "4:00 PM - 6:00 PM",
+      "location": "Downtown Grass Valley, Grass Valley Library",
+      "description": "Classic Monster Movie Fridays are BACK! Join us Fridays at 4 PM this October",
+      "category": "Library - Grass Valley",
+      "kid_relevant": true
+    },
+    {
+      "title": "Storytime",
+      "date": "October 3, 2025",
+      "time": "10:00 AM - 10:30 AM",
+      "location": "Madelyn Helling Library",
+      "description": "Children of all ages have fun with engaging books, songs and activities",
+      "category": "Library - Madelyn Helling Library",
+      "kid_relevant": true
+    },
+    {
+      "title": "Free Compost Giveaway",
+      "date": "October 4, 2025",
+      "time": "9:00 AM - 2:00 PM",
+      "location": "Nevada City Office - Eric Rood Administration Center",
+      "description": "Compost giveaway event",
+      "category": "Community Development Agency",
+      "kid_relevant": false
+    },
+    {
+      "title": "Sierra Speaker Series",
+      "date": "October 4, 2025",
+      "time": "5:30 PM - 7:00 PM",
+      "location": "Nevada County Library",
+      "description": "Educational speaker series",
+      "category": "Library",
+      "kid_relevant": false
+    },
+    {
+      "title": "Stay & Play",
+      "date": "October 8, 2025",
+      "time": "10:00 AM - 11:30 AM",
+      "location": "Gene Albaugh Community Room, Marian E. Gallaher Amphitheater, Madelyn Helling Library",
+      "description": "Caregivers and their little ones are invited to join us at the Madelyn Helling Library for time to play, learn, sing, read, and have fun together! Each session will feature a storytime, snacks, and an opportunity to learn together. No registration required. Ages 0-5",
+      "category": "Library - Kids & Teens",
+      "kid_relevant": true
+    },
+    {
+      "title": "Homework Help",
+      "date": "October 8, 2025",
+      "time": "3:00 PM - 5:00 PM",
+      "location": "Truckee Library",
+      "description": "Need a hand with a tricky math problem or a confusing assignment? Truckee Library's Homework Help program is here for you! Friendly volunteers are available to support students in grades K–12 with schoolwork. Just drop in. No appointment needed!",
+      "category": "Library - Kids & Teens",
+      "kid_relevant": true
+    },
+    {
+      "title": "Board of Supervisors Meeting",
+      "date": "October 8, 2025",
+      "time": "9:00 AM - 12:00 PM",
+      "location": "Eric Rood Administrative Center",
+      "description": "Regular meeting of the Nevada County Board of Supervisors",
+      "category": "Government / Board of Supervisors",
+      "kid_relevant": false
+    },
+    {
+      "title": "Planning Commission Meeting",
+      "date": "October 9, 2025",
+      "time": "5:00 PM - 8:00 PM",
+      "location": "Eric Rood Administrative Center",
+      "description": "Nevada County Planning Commission regular meeting",
+      "category": "Government / Planning",
+      "kid_relevant": false
+    },
+    {
+      "title": "Immunization Clinic",
+      "date": "October 10, 2025",
+      "time": "8:00 AM - 5:00 PM",
+      "location": "Nevada County Public Health",
+      "description": "Childhood and adult immunizations, including seasonal flu shots",
+      "category": "Public Health",
+      "kid_relevant": false
+    },
+    {
+      "title": "LEGO Club",
+      "date": "October 11, 2025",
+      "time": "3:00 PM - 4:00 PM",
+      "location": "Penn Valley Library",
+      "description": "Library provides LEGOs and weekly building challenges for kids",
+      "category": "Library - Kids & Teens",
+      "kid_relevant": true
+    },
+    {
+      "title": "Paws to Read",
+      "date": "October 11, 2025",
+      "time": "3:00 PM - 4:00 PM",
+      "location": "Grass Valley Library",
+      "description": "Practice reading aloud with a therapy dog",
+      "category": "Library - Kids & Teens",
+      "kid_relevant": true
+    },
+    {
+      "title": "Community Yoga",
+      "date": "October 12, 2025",
+      "time": "10:00 AM - 11:00 AM",
+      "location": "Madelyn Helling Library",
+      "description": "Community yoga session led by instructor Grace Kendrick",
+      "category": "Library / Wellness",
+      "kid_relevant": false
+    },
+    {
+      "title": "TB Screening",
+      "date": "October 14, 2025",
+      "time": "By appointment",
+      "location": "Nevada County Public Health",
+      "description": "Tuberculosis screening by appointment",
+      "category": "Public Health",
+      "kid_relevant": false
+    },
+    {
+      "title": "Dungeons and Dragons Club",
+      "date": "October 16, 2025",
+      "time": "4:00 PM - 6:00 PM",
+      "location": "Madelyn Helling Library",
+      "description": "Come level up cooperative skills, share creativity, and forge friendships through play",
+      "category": "Library - Kids & Teens",
+      "kid_relevant": true
+    },
+    {
+      "title": "#adulting Program",
+      "date": "October 17, 2025",
+      "time": "5:00 PM - 6:00 PM",
+      "location": "Grass Valley Library",
+      "description": "Life skills presentations for young adults",
+      "category": "Library - Young Adults",
+      "kid_relevant": false
+    },
+    {
+      "title": "English Conversation Group",
+      "date": "October 21, 2025",
+      "time": "5:00 PM - 6:00 PM",
+      "location": "Truckee Library",
+      "description": "Weekly conversation group for English language learners",
+      "category": "Library - Adult Education",
+      "kid_relevant": false
+    },
+    {
+      "title": "Tech Drop In",
+      "date": "October 22, 2025",
+      "time": "10:00 AM - 12:00 PM",
+      "location": "Madelyn Helling Library",
+      "description": "Help with devices, computer questions, and library digital services",
+      "category": "Library - Technology",
+      "kid_relevant": false
+    },
+    {
+      "title": "Baby Storytime",
+      "date": "October 28, 2025",
+      "time": "10:30 AM - 10:45 AM",
+      "location": "Grass Valley Library",
+      "description": "Short story time filled with rhymes, songs, and stories for babies",
+      "category": "Library - Kids & Teens",
+      "kid_relevant": true
+    },
+    {
+      "title": "Lawyer in the Library",
+      "date": "October 29, 2025",
+      "time": "2:00 PM - 4:00 PM",
+      "location": "Grass Valley Library",
+      "description": "Free legal consultation for people who cannot afford private legal services",
+      "category": "Library - Community Services",
+      "kid_relevant": false
+    },
+    {
+      "title": "Halloween Spooktacular and Spooky Boooky",
+      "date": "October 31, 2025",
+      "time": "4:00 PM - 6:00 PM",
+      "location": "Nevada County Libraries",
+      "description": "Halloween celebration event with spooky activities",
+      "category": "Library - Special Events",
+      "kid_relevant": true
+    },
+    {
+      "title": "Community Green Waste Event",
+      "date": "October 25, 2025",
+      "time": "9:00 AM - 2:00 PM",
+      "location": "Nevada County Waste Management",
+      "description": "Free green waste disposal for wildfire preparation",
+      "category": "Environmental Services",
+      "kid_relevant": false
+    },
+    {
+      "title": "Wild About Wool in Truckee",
+      "date": "October 29, 2025",
+      "time": "1:00 PM - 3:00 PM",
+      "location": "Truckee Library Workspace",
+      "description": "Learn felting. All supplies provided, all skill levels welcome",
+      "category": "Library - Arts & Crafts",
+      "kid_relevant": true
+    }
+  ],
+  "total_sample_events": 25,
+  "kid_relevant_count": 11,
+  "non_kid_relevant_count": 14,
+  "metadata_fields": {
+    "title": true,
+    "date": true,
+    "time": true,
+    "location": true,
+    "description": true,
+    "category": true,
+    "registration": false,
+    "cost": false,
+    "contact": false,
+    "url": false
+  },
+  "scraping_notes": {
+    "difficulty_rating": 3,
+    "difficulty_explanation": "Medium difficulty. Has iCal export option which makes structured data extraction easier, but requires selecting from multiple department calendars. HTML scraping is functional but JavaScript rendering required. No API available.",
+    "data_quality": "Good - events have consistent structure with title, date, time, location, description",
+    "data_completeness": "Moderate - missing some fields like registration info, cost, contact details, individual event URLs",
+    "kid_relevance_notes": "Mix of content - library events have high kid-relevance (70-80%), but overall county calendar is diluted by government meetings, health services, and adult programs. Overall kid-relevance: 44%"
+  }
+}

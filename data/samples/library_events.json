@@ -1,0 +1,124 @@
+{
+  "source": "Nevada County Library - Kids & Teens Calendar",
+  "urls": {
+    "primary": "https://nevadacountyca.gov/calendar.aspx?CID=81",
+    "libcal": "https://nevadacountyca.libcal.com/"
+  },
+  "scraped_at": "2025-10-07",
+  "method": "WebFetch (JavaScript-rendered page)",
+  "sample_events": [
+    {
+      "title": "Stay & Play",
+      "date": "October 1, 2025 (recurring: Oct 1, 8, 15, 22, 29)",
+      "time": "10:00 AM - 11:30 AM",
+      "location": "Madelyn Helling Library",
+      "ages": "0-5",
+      "category": "Storytime > Stay & Play",
+      "description": "Caregivers and their little ones are invited to join us for time to play, learn, sing, read, and have fun together",
+      "kid_relevant": true
+    },
+    {
+      "title": "Baby Storytime",
+      "date": "October 7, 14, 21, 28, 2025 (Tuesdays)",
+      "time": "10:30 AM - 10:45 AM",
+      "location": "Grass Valley Library",
+      "ages": "Babies/youngest children",
+      "category": "Storytime",
+      "description": "Short story time filled with rhymes, songs, and stories",
+      "kid_relevant": true
+    },
+    {
+      "title": "Paws to Read",
+      "date": "Multiple dates throughout October",
+      "time": "Varies (often 3:00-4:00 PM)",
+      "location": "Various libraries",
+      "ages": "All ages",
+      "category": "Literacy",
+      "description": "Practice reading aloud with a therapy dog",
+      "kid_relevant": true
+    },
+    {
+      "title": "Dungeons and Dragons Club",
+      "date": "October 2, 9, 16, 23, 30 (Thursdays)",
+      "time": "4:00 PM - 6:00 PM",
+      "location": "Madelyn Helling Library",
+      "ages": "All ages",
+      "category": "Gaming/Social",
+      "description": "Come level up cooperative skills, share creativity, and forge friendships through play",
+      "kid_relevant": true
+    },
+    {
+      "title": "Classic Monster Movie Showcase",
+      "date": "October 3, 10, 17, 31",
+      "time": "4:00 PM - 6:00 PM",
+      "location": "Grass Valley Library",
+      "ages": "All ages",
+      "category": "Entertainment",
+      "description": "Spooky fun for film fans of all ages",
+      "kid_relevant": true
+    },
+    {
+      "title": "Wild About Wool in Truckee",
+      "date": "October 1, 2025 (recurring)",
+      "time": "1:00 PM - 3:00 PM",
+      "location": "Truckee Library Workspace",
+      "ages": "All ages",
+      "category": "Arts & Crafts",
+      "description": "Learn how fun and easy felting can be. Find a new project for inspiration each week. All supplies are provided and all skill levels are welcome",
+      "kid_relevant": true
+    },
+    {
+      "title": "Build, Make, Play",
+      "date": "October 1, 2025 (recurring Wednesdays)",
+      "time": "3:00 PM - 4:00 PM",
+      "location": "Grass Valley Library",
+      "ages": "8-12",
+      "category": "STEAM",
+      "description": "Join us and let's have fun creating, building, and learning together",
+      "kid_relevant": true
+    },
+    {
+      "title": "English Conversation Group",
+      "date": "October 7, 2025 (recurring Tuesdays)",
+      "time": "5:00 PM - 6:00 PM",
+      "location": "Truckee Library",
+      "ages": "Adults",
+      "category": "Adult Literacy & ESL",
+      "description": "Weekly conversation group for English language learners to learn, improve and practice their English speaking skills",
+      "kid_relevant": false
+    },
+    {
+      "title": "Tech Drop In",
+      "date": "October 8, 2025 (recurring Wednesdays)",
+      "time": "10:00 AM - 12:00 PM",
+      "location": "Madelyn Helling Library",
+      "ages": "Adults, Seniors (65+)",
+      "category": "Computers & Technology",
+      "description": "Help with devices, computer questions, and library digital services",
+      "kid_relevant": false
+    },
+    {
+      "title": "LEGO Club",
+      "date": "Recurring weekly",
+      "time": "Varies",
+      "location": "Various locations",
+      "ages": "Kids",
+      "category": "STEAM",
+      "description": "Library provides LEGOs and weekly building challenges",
+      "kid_relevant": true
+    },
+    {
+      "title": "Storytime with Teacher Jacky",
+      "date": "Recurring",
+      "time": "Varies",
+      "location": "Library",
+      "ages": "Young children",
+      "category": "Storytime",
+      "description": "Storytime in English and American Sign Language",
+      "kid_relevant": true
+    }
+  ],
+  "total_sample_events": 11,
+  "kid_relevant_count": 9,
+  "non_kid_relevant_count": 2
+}
